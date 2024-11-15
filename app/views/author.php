@@ -3,6 +3,10 @@
 <div class="container">
 
     <div class="author-info">
+        <a href="/authors" class="authors-link">
+            <img src="/assets/icons/arrow-left-icon.svg" alt="Вернуться к авторам" class="authors-link-icon">
+            Авторы
+        </a>
         <h2>Об авторе</h2>
         <p style="font-size: 20px;"><?php echo htmlspecialchars($author['description']) ?></p>
         <h2>Список произведений</h2>

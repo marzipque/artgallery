@@ -25,7 +25,7 @@
 }
 
 h2 {
-    margin-top: 0;
+    margin-top: 0px;
 }
 
 ul {
@@ -35,4 +35,23 @@ ul {
 
 ul li {
     margin-top: 10px;
+}
+
+.authors-link {
+    display: flex;
+    align-items: center;
+    color: black;
+    font-size: 16px;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+.authors-link-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.authors-link:hover {
+    color: #007BFF;
 }

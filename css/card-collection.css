@@ -1,4 +1,4 @@
-.cards-collection {
+.card-collection {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -48,4 +48,13 @@
     color: #666;
     margin-top: 5px;
     text-decoration: none;
+}
+
+.card-collection-empty {
+    text-align: center; 
+    margin: 20px 0;
+}
+
+.card-collection-empty-image {
+    height: 220px;
 }

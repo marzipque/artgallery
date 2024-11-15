@@ -7,6 +7,7 @@ section {
     background-color: white;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    position: relative;
 }
 
 .artwork {
@@ -56,4 +57,25 @@ h2 {
     width: 100px;
     height: 100px;
     overflow: hidden;
+}
+
+.gallery-link {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: black;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.gallery-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.gallery-link:hover {
+    color: #007BFF;
 }

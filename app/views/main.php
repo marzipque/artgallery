@@ -10,7 +10,7 @@
 <section class="content-section">
 
     <h1 style="text-align: center;">ПОДБОРКА ДЛЯ ВАС</h1>
-    <div class="cards-collection">
+    <div class="card-collection">
         <?php foreach ($artworks as $artwork): ?>
             <div class="card-item">
                 <a href="/artwork/<?php echo $artwork['id']; ?>">
