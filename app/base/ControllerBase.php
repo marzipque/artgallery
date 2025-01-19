@@ -26,23 +26,26 @@ abstract class ControllerBase
 			 * 
 			 * @throws Exception Если представление не найдено
 			 */
-			public function render($viewName, $useLayout, $data): void
+			public function render($viewName, $layoutName, $data): void
 			{
 				extract($data);
 
 				$content = "app/views/$viewName.php";
-			
+				$layout = "app/views/$layoutName.php";
+
 				if (file_exists($content)) {
-					if ($useLayout) {
-						include("app/views/layout.php");
+					if (file_exists($layout)) {
+						include($layout);
 					} else {
 						include($content);
 					}
 				} else {
-					throw new Exception("Представление не найдено: $viewName");
+					throw new Exception('Представление не найдено: $viewName');
 				}
 			}
 		};
+
+		session_start();
 	}
 
 	/**
@@ -52,8 +55,8 @@ abstract class ControllerBase
 	 * @param string $layoutName Имя подключаемого шаблона страницы
 	 * @param array $data Данные, которые будут доступны в представлении
 	 */
-	protected function render(string $viewName, bool $useLayout = true, array $data = []): void
+	protected function render(string $viewName, string $layoutName='layout', array $data = []): void
 	{
-		$this->view->render($viewName, $useLayout, $data);
+		$this->view->render($viewName, $layoutName, $data);
 	}
 }

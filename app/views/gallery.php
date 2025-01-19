@@ -6,7 +6,7 @@
 </section>
 
 <section class="content-section">
-    <form action="/gallery" method="GET" class="filters-panel">
+    <form action="/gallery" method="POST" class="filters-panel">
         <div class="filters-search">
             <input type="text" name="search" class="filters-search-input" placeholder="Поиск..."
                 value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>">
@@ -52,13 +52,13 @@
     <?php if (empty($artworks)): ?>
         <div class="card-collection-empty">
             <img src="/assets/icons/empty-list-icon.svg" alt="ПРОИЗВЕДЕНИЯ ИСКУССТВА НЕ НАЙДЕНЫ" class="card-collection-empty-image">
-            <p>К СОЖАЛЕНИЮ, НЕ УДАЛОСЬ НАЙТИ НИ ПРОИЗВЕДЕНИЯ ИСКУССТВА, СООТВЕТСВУЮЩЕГО ВАШЕМУ ЗАПРОСУ...</p>
+            <p>К СОЖАЛЕНИЮ, НЕ УДАЛОСЬ НАЙТИ ПРОИЗВЕДЕНИЯ ИСКУССТВА, СООТВЕТСВУЮЩЕГО ВАШЕМУ ЗАПРОСУ...</p>
         </div>
     <?php else: ?>
         <div class="card-collection">
             <?php foreach ($artworks as $artwork): ?>
                 <div class="card-item">
-                    <a href="/artwork/<?php echo $artwork['id']; ?>">
+                    <a href="/gallery/<?php echo $artwork['id']; ?>">
                         <img src="<?php echo htmlspecialchars($artwork['img']); ?>" alt="<?php echo $artwork['title']; ?>" class="card-item-image">
                         <h2 class="card-item-title"><?php echo htmlspecialchars($artwork['title']); ?></h2>
                         <hr class="card-item-splitter">

@@ -32,11 +32,24 @@ class AuthorsController extends ControllerBase
     }
 
     /**
+     * Отображает информацию о конкретном авторе и его произведениях
+     * 
+     * @param int $id Идентификатор автора
+     */
+    public function show($id): void
+    {
+        $author = $this->authorModel->getAuthorById($id);
+        $artworks = $this->authorModel->getAllArtworksByAuthor($id);
+
+        $this->render('author', data: ['author' => $author, 'artworks' => $artworks]);
+    }
+
+    /**
      * Отображает всех авторов соотвествующих критериям поиска
      */
     public function search(): void
     {
-        $searchQuery = $_GET['search'] ?? '';
+        $searchQuery = $_POST['search'] ?? '';
 
         $authors = $this->authorModel->getAllAuthors();
 

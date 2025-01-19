@@ -39,7 +39,9 @@ class Author extends ModelBase
     public function getAuthorById($id): mixed
     {
         $author = $this->fetch("SELECT * FROM authors WHERE id = :id", [':id' => $id]);
-        $author['img'] = 'data:image/jpeg;base64,' . base64_encode($author['img']);
+        if ($author) {
+            $author['img'] = 'data:image/jpeg;base64,' . base64_encode($author['img']);
+        }
 
         return $author;
     }
@@ -47,13 +49,13 @@ class Author extends ModelBase
     /**
      * Добавляет нового автора
      * 
-     * @param array $data Данные об авторе, включая имя, изображение, школу и описание
+     * @param array $data Данные об авторе, включая имя, изображение, образование, годы жизни и описание
      * 
      * @return bool Успех операции вставки
      */
     public function createAuthor($data): bool
     {
-        $query = "INSERT INTO authors (name, img, school, description) VALUES (:name, :img, :school, :description)";
+        $query = "INSERT INTO authors (name, img, education, yearsOfLife, description) VALUES (:name, :img, :education, :yearsOfLife, :description)";
         return $this->insert($query, $data);
     }
 
@@ -66,7 +68,15 @@ class Author extends ModelBase
     public function updateAuthor($id, $data): void
     {
         $data[':id'] = $id;
-        $query = "UPDATE authors SET name = :name, img = :img, school = :school, description = :description WHERE id = :id";
+
+        if (isset($data['img'])) {
+            // Если есть изображение, обновляем с учетом поля img
+            $query = "UPDATE authors SET name = :name, img = :img, education = :education, yearsOfLife = :yearsOfLife, description = :description WHERE id = :id";
+        } else {
+            // Если изображения нет, обновляем без поля img
+            $query = "UPDATE authors SET name = :name, education = :education, yearsOfLife = :yearsOfLife, description = :description WHERE id = :id";
+        }
+
         $this->update($query, $data);
     }
 
@@ -102,5 +112,27 @@ class Author extends ModelBase
     public function getUniqueAuthors(): array
     {
         return $this->fetchAll("SELECT DISTINCT name FROM authors");
+    }
+
+    /**
+     * Получает дату и время последнего изменения таблицы authors
+     * 
+     * @return string|null Возвращает дату и время последнего изменения или null, если не найдено
+     */
+    public function getLastModifiedTime(): ?string
+    {
+        $query = "
+            SELECT UPDATE_TIME
+            FROM information_schema.tables
+            WHERE TABLE_SCHEMA = :schema AND TABLE_NAME = :table
+        ";
+
+        $params = [
+            'schema' => 'artgallery',
+            'table' => 'authors'
+        ];
+
+        $result = $this->fetch($query, $params);
+        return $result ? $result['UPDATE_TIME'] : null;
     }
 }

@@ -12,7 +12,7 @@
         <h2>Список произведений</h2>
         <ul style="font-size: 20px;">
             <?php foreach ($artworks as $artwork): ?>
-                <li><a href="/artwork/<?php echo htmlspecialchars($artwork['id']) ?>"><?php echo htmlspecialchars($artwork['title']) ?></a></li>
+                <li><a href="/gallery/<?php echo htmlspecialchars($artwork['id']) ?>"><?php echo htmlspecialchars($artwork['title']) ?></a></li>
             <?php endforeach; ?>
         </ul>
     </div>

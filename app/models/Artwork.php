@@ -53,7 +53,7 @@ class Artwork extends ModelBase
      */
     public function createArtwork($data): bool
     {
-        $query = "INSERT INTO artworks (img, title, authorId, category, genre, material, size, technique, description) VALUES (:img, :title, :authorId, :category, :genre, :material, :size, :technique, :description)";
+        $query = "INSERT INTO artworks (img, yearOfCreation, title, authorId, category, genre, material, size, technique, description) VALUES (:img, :yearOfCreation, :title, :authorId, :category, :genre, :material, :size, :technique, :description)";
         return $this->insert($query, $data);
     }
 
@@ -66,7 +66,13 @@ class Artwork extends ModelBase
     public function updateArtwork($id, $data): void
     {
         $data[':id'] = $id;
-        $query = "UPDATE artworks SET img = :img, title = :title, authorId = :authorId, category = :category, genre = :genre, material = :material, size = :size, technique = :technique, description = :description WHERE id = :id";
+
+        if (isset($data[':img'])) {
+            $query = "UPDATE artworks SET img = :img, yearOfCreation = :yearOfCreation, title = :title, authorId = :authorId, category = :category, genre = :genre, material = :material, size = :size, technique = :technique, description = :description WHERE id = :id";
+        } else {
+            $query = "UPDATE artworks SET title = :title, yearOfCreation = :yearOfCreation, authorId = :authorId, category = :category, genre = :genre, material = :material, size = :size, technique = :technique, description = :description WHERE id = :id";
+        }
+
         $this->update($query, $data);
     }
 
@@ -113,5 +119,27 @@ class Artwork extends ModelBase
     public function getUniqueGenres(): array
     {
         return $this->fetchAll("SELECT DISTINCT genre FROM artworks");
+    }
+
+    /**
+     * Получает дату и время последнего изменения таблицы admins
+     * 
+     * @return string|null Возвращает дату и время последнего изменения или null, если не найдено
+     */
+    public function getLastModifiedTime(): ?string
+    {
+        $query = "
+            SELECT UPDATE_TIME
+            FROM information_schema.tables
+            WHERE TABLE_SCHEMA = :schema AND TABLE_NAME = :table
+        ";
+
+        $params = [
+            'schema' => 'artgallery',
+            'table' => 'artworks'
+        ];
+
+        $result = $this->fetch($query, $params);
+        return $result ? $result['UPDATE_TIME'] : null;
     }
 }

@@ -40,18 +40,6 @@ class Router
         $requestMethod = $_SERVER['REQUEST_METHOD'];
         $requestUri = rtrim($_SERVER['REQUEST_URI'], '/');
 
-        // Обработка поискового/фильтрационного запроса от страницы галереи
-        if ($requestMethod === 'GET' && preg_match('/^\/gallery\?(.*)$/', $requestUri)) {
-            $this->dispatch('GalleryController', 'search', []);
-            return;
-        }
-
-        // Обработка поискового/фильтрационного запроса от страницы авторов
-        if ($requestMethod === 'GET' && preg_match('/^\/authors\?(.*)$/', $requestUri)) {
-            $this->dispatch('AuthorsController', 'search', []);
-            return;
-        }
-
         foreach ($this->routes as $route) {
             if (($route['method'] === $requestMethod && preg_match($this->getRegex($route['path']), $requestUri, $matches))) {
                 array_shift($matches);

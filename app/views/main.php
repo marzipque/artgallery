@@ -13,7 +13,7 @@
     <div class="card-collection">
         <?php foreach ($artworks as $artwork): ?>
             <div class="card-item">
-                <a href="/artwork/<?php echo $artwork['id']; ?>">
+                <a href="/gallery/<?php echo $artwork['id']; ?>">
                     <img src="<?php echo htmlspecialchars($artwork['img']); ?>" alt="<?php echo $artwork['title']; ?>" class="card-item-image">
                     <h2 class="card-item-title"><?php echo htmlspecialchars($artwork['title']); ?></h2>
                     <hr class="card-item-splitter">

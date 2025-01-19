@@ -21,7 +21,7 @@
             <h2>Характеристики</h2>
             <ul class="characteristics-list">
                 <li>Название картины: <?php echo htmlspecialchars($artwork['title']) ?></li>
-                <li>Автор: <a href="/author/<?php echo htmlspecialchars($author['id']) ?>"> <?php echo htmlspecialchars($author['name']) ?> </a></li>
+                <li>Автор: <a href="/authors/<?php echo htmlspecialchars($author['id']) ?>"> <?php echo htmlspecialchars($author['name']) ?> </a></li>
                 <li>Жанр: <?php echo htmlspecialchars($artwork['genre']) ?></li>
                 <li>Категория: <?php echo htmlspecialchars($artwork['category']) ?></li>
                 <li>Техника исполнения: <?php echo htmlspecialchars($artwork['technique']) ?></li>

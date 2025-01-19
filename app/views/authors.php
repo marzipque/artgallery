@@ -23,7 +23,7 @@
         <div class="card-collection">
             <?php foreach ($authors as $author): ?>
                 <div class="card-item">
-                    <a href="/author/<?php echo $author['id']; ?>">
+                    <a href="/authors/<?php echo $author['id']; ?>">
                         <img src="<?php echo htmlspecialchars($author['img']); ?>" alt="<?php echo $author['name']; ?>" class="card-item-image">
                         <h2 class="card-item-title"><?php echo htmlspecialchars($author['name']); ?></h2>
                     </a>

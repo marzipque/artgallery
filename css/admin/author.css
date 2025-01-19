@@ -1,0 +1,137 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.author-info {
+    flex: 1;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+    border-radius: 8px;
+}
+
+.portrait {
+    flex: 1;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h2 {
+    margin-top: 0px;
+}
+
+.authors-link {
+    display: flex;
+    align-items: center;
+    color: black;
+    font-size: 16px;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+.authors-link-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.authors-link:hover {
+    color: #007BFF;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+label {
+    margin-right: 10px;
+}
+
+input {
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.controller {
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+}
+
+.btn {
+    display: block;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.delete {
+    background-color: red;
+    color: white;
+}
+
+.apply {
+    background-color: #007bff;
+    color: white;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+}
+
+.image-container img {
+    transition: opacity 0.3s ease;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(128, 128, 128, 0.5);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.image-container:hover img {
+    opacity: 0.5;
+}
+
+.image-container:hover .overlay {
+    opacity: 1;
+}

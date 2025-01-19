@@ -49,14 +49,27 @@ class GalleryController extends ControllerBase
     }
 
     /**
+     * Отображает информацию о конкретном произведении искусства
+     * 
+     * @param int $id Идентификатор произведения искусства
+     */
+    public function show($id): void
+    {
+        $artwork = $this->artworkModel->getArtworkById($id);
+        $author = $this->authorModel->getAuthorById($artwork['authorId']);
+
+        $this->render('artwork', data: ['artwork' => $artwork, 'author' => $author]);
+    }
+
+    /**
      * Отображает все произведения искусства соотвествующие критериям поиска
      */
     public function search(): void
     {
-        $searchQuery = $_GET['search'] ?? '';
-        $category = $_GET['category'] ?? '';
-        $genre = $_GET['genre'] ?? '';
-        $author = $_GET['author'] ?? '';
+        $searchQuery = $_POST['search'] ?? '';
+        $category = $_POST['category'] ?? '';
+        $genre = $_POST['genre'] ?? '';
+        $author = $_POST['author'] ?? '';
 
         $artworks = $this->artworkModel->getAllArtworks();
 
@@ -64,7 +77,7 @@ class GalleryController extends ControllerBase
             $artwork['author'] = $this->authorModel->getAuthorById($artwork['authorId']);
         }
         unset($artwork);
-        
+
         $categories = $this->artworkModel->getUniqueCategories();
         $genres = $this->artworkModel->getUniqueGenres();
         $authors = $this->authorModel->getUniqueAuthors();
